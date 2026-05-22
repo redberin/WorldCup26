@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA World Cup 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Neue+Haas+Grotesk+Display+Pro:wght@400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #B00015;
+    --accent-light: #ff0020;
+    --accent-subtle: rgba(176,0,21,0.08);
+    --accent-border: rgba(176,0,21,0.25);
+    --bg: #0a0a0a;
+    --bg2: #141414;
+    --bg3: #1c1c1e;
+    --bg4: #252528;
+    --surface: rgba(255,255,255,0.04);
+    --surface-hover: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.09);
+    --border-strong: rgba(255,255,255,0.18);
+    --text: #f5f5f7;
+    --text2: rgba(245,245,247,0.65);
+    --text3: rgba(245,245,247,0.38);
+    --radius-sm: 10px;
+    --radius: 16px;
+    --radius-lg: 22px;
+    --radius-xl: 30px;
+    --font: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ─── TEAM THEMES ─── */
+  body.bih {
+    --accent: #0033A0;
+    --accent-light: #2255cc;
+    --accent-subtle: rgba(0,51,160,0.1);
+    --accent-border: rgba(0,51,160,0.3);
+  }
+  body.ger {
+    --accent: #1a1a1a;
+    --accent-light: #333333;
+    --accent-subtle: rgba(50,50,50,0.12);
+    --accent-border: rgba(80,80,80,0.4);
+  }
+  body.usa {
+    --accent: #B22234;
+    --accent-light: #d42a40;
+    --accent-subtle: rgba(178,34,52,0.1);
+    --accent-border: rgba(178,34,52,0.3);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.5s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(24px) saturate(1.8);
+    -webkit-backdrop-filter: blur(24px) saturate(1.8);
+    background: rgba(10,10,10,0.82);
+    border-bottom: 0.5px solid var(--border);
+    transition: background 0.4s ease;
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-logo {
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: background 0.4s ease;
+  }
+
+  .nav-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--text);
+  }
+
+  .nav-subtitle {
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 2px;
+  }
+
+  .nav-tab {
+    background: none;
+    border: none;
+    color: var(--text3);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: var(--font);
+    letter-spacing: -0.1px;
+  }
+
+  .nav-tab:hover { color: var(--text); background: var(--surface-hover); }
+  .nav-tab.active { color: var(--text); background: var(--surface-hover); }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding: 72px 0 56px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 16px;
+    transition: color 0.4s ease;
+  }
+
+  .hero-title {
+    font-size: clamp(42px, 8vw, 72px);
+    font-weight: 700;
+    letter-spacing: -2.5px;
+    line-height: 0.95;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .hero-title span {
+    color: var(--accent-light);
+    transition: color 0.4s ease;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text2);
+    font-weight: 300;
+    letter-spacing: -0.3px;
+    margin-bottom: 48px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+
+  /* ─── TEAM PICKER ─── */
+  .team-picker {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .team-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 50px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text2);
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    letter-spacing: -0.2px;
+  }
+
+  .team-btn:hover {
+    border-color: rgba(255,255,255,0.3);
+    background: var(--surface-hover);
+    color: var(--text);
+    transform: translateY(-1px);
+  }
+
+  .team-btn.active {
+    background: var(--accent-subtle);
+    border-color: var(--accent-border);
+    color: var(--text);
+  }
+
+  .team-flag {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .team-info {
+    text-align: left;
+    line-height: 1.2;
+  }
+
+  .team-name { font-size: 13px; font-weight: 600; }
+  .team-group { font-size: 11px; color: var(--text3); }
+
+  /* ─── STATS STRIP ─── */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 56px;
+  }
+
+  .stat-cell {
+    background: var(--bg2);
+    padding: 20px 16px;
+    text-align: center;
+    transition: background 0.3s ease;
+  }
+
+  .stat-cell:hover { background: var(--bg3); }
+
+  .stat-val {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: var(--accent-light);
+    line-height: 1;
+    margin-bottom: 4px;
+    transition: color 0.4s ease;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text3);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    color: var(--text);
+  }
+
+  .section-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    background: var(--accent-subtle);
+    border: 1px solid var(--accent-border);
+    padding: 3px 9px;
+    border-radius: 20px;
+    transition: all 0.4s ease;
+  }
+
+  /* ─── MATCH CARDS ─── */
+  .matches-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 56px;
+  }
+
+  .match-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .match-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 2px 0 0 2px;
+    opacity: 0;
+    transition: opacity var(--transition), background 0.4s ease;
+  }
+
+  .match-card.featured::before { opacity: 1; }
+  .match-card:hover { background: var(--bg3); border-color: var(--border-strong); }
+
+  .match-team {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .match-team.away {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+
+  .match-flag { font-size: 28px; line-height: 1; }
+
+  .match-team-name {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--text);
+  }
+
+  .match-team-sub {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  .match-center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 110px;
+  }
+
+  .match-date {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: var(--accent-light);
+    text-transform: uppercase;
+    transition: color 0.4s ease;
+  }
+
+  .match-vs {
+    font-size: 11px;
+    color: var(--text3);
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .match-time {
+    font-size: 11px;
+    color: var(--text3);
+  }
+
+  .match-venue-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text3);
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* ─── GROUP TABLE ─── */
+  .group-section {
+    margin-bottom: 56px;
+  }
+
+  .group-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .group-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .group-table th {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 12px 16px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+  }
+
+  .group-table th:first-child { text-align: left; }
+
+  .group-table td {
+    padding: 14px 16px;
+    text-align: right;
+    border-bottom: 0.5px solid var(--border);
+    color: var(--text2);
+    font-size: 14px;
+    transition: background 0.2s ease;
+  }
+
+  .group-table td:first-child { text-align: left; }
+  .group-table tr:last-child td { border-bottom: none; }
+
+  .group-table tr:hover td { background: var(--surface); }
+
+  .team-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .team-flag-sm { font-size: 18px; }
+
+  .team-name-cell {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.2px;
+  }
+
+  .highlight-row td { color: var(--text); }
+  .highlight-row .team-name-cell { color: var(--accent-light); }
+
+  .pts-cell {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text) !important;
+  }
+
+  .qualification-bar {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+    background: var(--accent);
+    opacity: 0.7;
+    transition: background 0.4s ease;
+  }
+
+  /* ─── INFO CARDS ─── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+
+  .info-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    transition: all var(--transition);
+  }
+
+  .info-card:hover {
+    background: var(--bg3);
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+
+  .info-card-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .info-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text2);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .info-card-value {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .info-card-sub {
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  /* ─── PLAYER GRID ─── */
+  .players-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 56px;
+  }
+
+  .player-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    transition: all var(--transition);
+    text-align: center;
+  }
+
+  .player-card:hover {
+    background: var(--bg3);
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+
+  .player-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent-subtle);
+    border: 1.5px solid var(--accent-border);
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent-light);
+    transition: all 0.4s ease;
+    font-family: var(--font);
+  }
+
+  .player-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.2px;
+    margin-bottom: 3px;
+  }
+
+  .player-pos {
+    font-size: 11px;
+    color: var(--text3);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    border-top: 0.5px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+  }
+
+  .footer p {
+    font-size: 12px;
+    color: var(--text3);
+    letter-spacing: 0.3px;
+  }
+
+  /* ─── SECTION VISIBILITY ─── */
+  .section { opacity: 0; transform: translateY(16px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .section.visible { opacity: 1; transform: none; }
+
+  /* ─── STAGGER CHILDREN ─── */
+  .match-card { opacity: 0; transform: translateY(12px); transition: opacity 0.35s ease, transform 0.35s ease, background 0.2s ease, border-color 0.2s ease; }
+  .match-card.visible { opacity: 1; transform: none; }
+
+  /* ─── ACCENT LINES ON HIGHLIGHTED TEAM ─── */
+  .team-highlight-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    margin-right: 4px;
+    transition: background 0.4s ease;
+  }
+
+  /* ─── TABS SECTION ─── */
+  .section-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+  }
+
+  .section-tab {
+    background: none;
+    border: none;
+    color: var(--text3);
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    transition: all var(--transition);
+    letter-spacing: -0.2px;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .section-tab:hover { color: var(--text2); }
+  .section-tab.active { color: var(--accent-light); border-bottom-color: var(--accent-light); transition: color 0.4s, border-color 0.4s; }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ─── LOADING FADE ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .hero-content { animation: fadeUp 0.6s ease both; }
+  .hero-stats { animation: fadeUp 0.6s ease 0.1s both; }
+
+  @media (max-width: 600px) {
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .info-grid { grid-template-columns: 1fr; }
+    .players-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-title { font-size: 38px; letter-spacing: -1.5px; }
+    .match-card { grid-template-columns: 1fr; gap: 12px; }
+    .match-center { flex-direction: row; gap: 12px; min-width: auto; }
+    .match-team.away { flex-direction: row; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="nav-logo">⚽</div>
+      <div>
+        <div class="nav-title">World Cup 2026</div>
+        <div class="nav-subtitle">June 11 – July 19 · North America</div>
+      </div>
+    </div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="scrollTo(0,0)">Overview</button>
+      <button class="nav-tab" onclick="document.getElementById('schedule').scrollIntoView({behavior:'smooth'})">Schedule</button>
+      <button class="nav-tab" onclick="document.getElementById('group').scrollIntoView({behavior:'smooth'})">Group</button>
+      <button class="nav-tab" onclick="document.getElementById('squad').scrollIntoView({behavior:'smooth'})">Squad</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow" id="hero-eyebrow">FIFA World Cup 2026</div>
+      <h1 class="hero-title">The World's<br><span id="hero-team-name">Greatest Stage</span></h1>
+      <p class="hero-sub" id="hero-sub">48 nations. 104 matches. One champion. The world's biggest football tournament returns to North America.</p>
+
+      <div class="team-picker" id="team-picker">
+        <button class="team-btn" data-team="bih" onclick="setTeam('bih')">
+          <div class="team-flag">🇧🇦</div>
+          <div class="team-info">
+            <div class="team-name">Bosnia & Herzegovina</div>
+            <div class="team-group">Group B</div>
+          </div>
+        </button>
+        <button class="team-btn" data-team="ger" onclick="setTeam('ger')">
+          <div class="team-flag">🇩🇪</div>
+          <div class="team-info">
+            <div class="team-name">Germany</div>
+            <div class="team-group">Group E</div>
+          </div>
+        </button>
+        <button class="team-btn" data-team="usa" onclick="setTeam('usa')">
+          <div class="team-flag">🇺🇸</div>
+          <div class="team-info">
+            <div class="team-name">United States</div>
+            <div class="team-group">Group D</div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- STATS STRIP -->
+    <div class="stats-strip hero-stats" id="stats-strip">
+      <div class="stat-cell">
+        <div class="stat-val" id="stat-wc">0</div>
+        <div class="stat-label">World Cups</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val" id="stat-best">—</div>
+        <div class="stat-label">Best Finish</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val" id="stat-group">—</div>
+        <div class="stat-label">Group</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val" id="stat-games">3</div>
+        <div class="stat-label">Group Games</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div id="schedule" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Group Stage Fixtures</h2>
+      <span class="section-badge" id="schedule-badge">Select a team</span>
+    </div>
+
+    <div class="matches-list" id="matches-list">
+      <div style="text-align:center; padding: 48px; color: var(--text3); font-size: 14px;">
+        Select a team above to view their schedule
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP TABLE -->
+  <div id="group" class="section">
+    <div class="section-header">
+      <h2 class="section-title" id="group-title">Group</h2>
+      <span class="section-badge" id="group-badge">Group Stage</span>
+    </div>
+
+    <div class="group-section">
+      <div class="group-card">
+        <table class="group-table" id="group-table">
+          <thead>
+            <tr>
+              <th style="width:50%">Team</th>
+              <th>Pld</th>
+              <th>W</th>
+              <th>D</th>
+              <th>L</th>
+              <th>GD</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody id="group-body">
+            <tr><td colspan="7" style="text-align:center; padding: 32px; color: var(--text3); font-size: 14px;">Select a team to view group standings</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size: 12px; color: var(--text3); margin-top: 10px; padding-left: 4px;">
+        <span class="qualification-bar"></span>Top 2 teams + best 8 third-place teams advance to Round of 32
+      </p>
+    </div>
+
+    <!-- INFO CARDS -->
+    <div class="info-grid" id="info-grid" style="display:none">
+      <div class="info-card">
+        <div class="info-card-icon" id="info-flag">🏳️</div>
+        <div class="info-card-title">Head Coach</div>
+        <div class="info-card-value" id="info-coach">—</div>
+        <div class="info-card-sub" id="info-coach-sub">—</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🏆</div>
+        <div class="info-card-title">Best World Cup Finish</div>
+        <div class="info-card-value" id="info-best">—</div>
+        <div class="info-card-sub" id="info-best-sub">—</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📅</div>
+        <div class="info-card-title">First Match</div>
+        <div class="info-card-value" id="info-first">—</div>
+        <div class="info-card-sub" id="info-first-sub">—</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📍</div>
+        <div class="info-card-title">Primary Venue</div>
+        <div class="info-card-value" id="info-venue">—</div>
+        <div class="info-card-sub" id="info-venue-sub">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SQUAD -->
+  <div id="squad" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Key Players</h2>
+      <span class="section-badge" id="squad-badge">Watch List</span>
+    </div>
+    <div class="players-grid" id="players-grid">
+      <div style="grid-column: 1/-1; text-align:center; padding: 48px; color: var(--text3); font-size: 14px;">
+        Select a team to view key players
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>FIFA World Cup 2026 · June 11 – July 19 · USA, Canada & Mexico · 48 Teams · 104 Matches</p>
+    <p style="margin-top: 6px;">Schedule data accurate as of May 2026. All times ET.</p>
+  </div>
+</footer>
+
+<script>
+const TEAMS = {
+  bih: {
+    name: 'Bosnia & Herzegovina',
+    shortName: 'BiH',
+    flag: '🇧🇦',
+    heroName: 'Zmajevi',
+    heroSub: 'The Dragons of the Balkans are back on the world stage. Bosnia & Herzegovina make their return to the FIFA World Cup.',
+    eyebrow: 'Bosnia & Herzegovina · Group B',
+    wc: 1, best: 'Round of 16', bestSub: 'Brazil 2014',
+    group: 'B',
+    coach: 'Sergej Barbarez', coachSub: 'Head Coach since 2024',
+    firstMatch: 'June 12 vs Canada', firstSub: 'BMO Field, Toronto',
+    venue: 'BMO Field', venueSub: 'Toronto, Canada',
+    stats: { wc: '1', best: 'R16', group: 'B', games: '3' },
+    matches: [
+      { date: 'Jun 12', time: '3:00 PM ET', home: 'Canada', homeFlag: '🇨🇦', away: 'Bosnia & Herzegovina', awayFlag: '🇧🇦', venue: 'BMO Field, Toronto', featured: true },
+      { date: 'Jun 18', time: '3:00 PM ET', home: 'Switzerland', homeFlag: '🇨🇭', away: 'Bosnia & Herzegovina', awayFlag: '🇧🇦', venue: 'SoFi Stadium, Inglewood', featured: true },
+      { date: 'Jun 24', time: '3:00 PM ET', home: 'Bosnia & Herzegovina', homeFlag: '🇧🇦', away: 'Qatar', awayFlag: '🇶🇦', venue: 'Lumen Field, Seattle', featured: true },
+    ],
+    groupData: [
+      { team: 'Canada', flag: '🇨🇦', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: true },
+      { team: 'Bosnia & Herzegovina', flag: '🇧🇦', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: false },
+      { team: 'Qatar', flag: '🇶🇦', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: false },
+      { team: 'Switzerland', flag: '🇨🇭', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: false },
+    ],
+    players: [
+      { name: 'Edin Džeko', pos: 'Forward', init: 'EĐ' },
+      { name: 'Sead Kolašinac', pos: 'Defender', init: 'SK' },
+      { name: 'Miralem Pjanić', pos: 'Midfielder', init: 'MP' },
+      { name: 'Asmir Begović', pos: 'Goalkeeper', init: 'AB' },
+      { name: 'Benjamin Šeško', pos: 'Forward', init: 'BŠ' },
+      { name: 'Ermedin Demirović', pos: 'Forward', init: 'ED' },
+    ]
+  },
+  ger: {
+    name: 'Germany',
+    shortName: 'GER',
+    flag: '🇩🇪',
+    heroName: 'Die Mannschaft',
+    heroSub: 'Four-time world champions and perennial title contenders. Germany are the benchmark for tournament football.',
+    eyebrow: 'Germany · Group E',
+    wc: 20, best: 'Champions', bestSub: 'Brazil 2014',
+    group: 'E',
+    coach: 'Julian Nagelsmann', coachSub: 'Head Coach since 2023',
+    firstMatch: 'June 14 vs Curaçao', firstSub: 'NRG Stadium, Houston',
+    venue: 'NRG Stadium', venueSub: 'Houston, Texas',
+    stats: { wc: '20', best: '4×🏆', group: 'E', games: '3' },
+    matches: [
+      { date: 'Jun 14', time: '1:00 PM ET', home: 'Germany', homeFlag: '🇩🇪', away: 'Curaçao', awayFlag: '🇨🇼', venue: 'NRG Stadium, Houston', featured: true },
+      { date: 'Jun 20', time: '4:00 PM ET', home: 'Germany', homeFlag: '🇩🇪', away: 'Ivory Coast', awayFlag: '🇨🇮', venue: 'BMO Field, Toronto', featured: true },
+      { date: 'Jun 25', time: '4:00 PM ET', home: 'Ecuador', homeFlag: '🇪🇨', away: 'Germany', awayFlag: '🇩🇪', venue: 'MetLife Stadium, New Jersey', featured: true },
+    ],
+    groupData: [
+      { team: 'Germany', flag: '🇩🇪', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: true },
+      { team: "Côte d'Ivoire", flag: '🇨🇮', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: false },
+      { team: 'Ecuador', flag: '🇪🇨', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: false },
+      { team: 'Curaçao', flag: '🇨🇼', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: false },
+    ],
+    players: [
+      { name: 'Manuel Neuer', pos: 'Goalkeeper', init: 'MN' },
+      { name: 'Joshua Kimmich', pos: 'Midfielder', init: 'JK' },
+      { name: 'Jamal Musiala', pos: 'Midfielder', init: 'JM' },
+      { name: 'Florian Wirtz', pos: 'Midfielder', init: 'FW' },
+      { name: 'Kai Havertz', pos: 'Forward', init: 'KH' },
+      { name: 'Leroy Sané', pos: 'Forward', init: 'LS' },
+    ]
+  },
+  usa: {
+    name: 'United States',
+    shortName: 'USA',
+    flag: '🇺🇸',
+    heroName: 'Team USA',
+    heroSub: 'The host nation enters the tournament with rising stars and home crowd advantage across packed US stadiums.',
+    eyebrow: 'United States · Group D',
+    wc: 11, best: '3rd Place', bestSub: 'Uruguay 1930',
+    group: 'D',
+    coach: 'Mauricio Pochettino', coachSub: 'Head Coach since 2024',
+    firstMatch: 'June 12 vs Paraguay', firstSub: 'SoFi Stadium, Inglewood',
+    venue: 'SoFi Stadium', venueSub: 'Inglewood, California',
+    stats: { wc: '11', best: '3rd', group: 'D', games: '3' },
+    matches: [
+      { date: 'Jun 12', time: '9:00 PM ET', home: 'United States', homeFlag: '🇺🇸', away: 'Paraguay', awayFlag: '🇵🇾', venue: 'SoFi Stadium, Inglewood', featured: true },
+      { date: 'Jun 19', time: '3:00 PM ET', home: 'United States', homeFlag: '🇺🇸', away: 'Australia', awayFlag: '🇦🇺', venue: 'Lumen Field, Seattle', featured: true },
+      { date: 'Jun 25', time: '10:00 PM ET', home: 'Türkiye', homeFlag: '🇹🇷', away: 'United States', awayFlag: '🇺🇸', venue: 'SoFi Stadium, Inglewood', featured: true },
+    ],
+    groupData: [
+      { team: 'United States', flag: '🇺🇸', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: true },
+      { team: 'Türkiye', flag: '🇹🇷', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: false },
+      { team: 'Paraguay', flag: '🇵🇾', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: false },
+      { team: 'Australia', flag: '🇦🇺', pld:0, w:0, d:0, l:0, gd:0, pts:0, qual: false },
+    ],
+    players: [
+      { name: 'Christian Pulisic', pos: 'Forward', init: 'CP' },
+      { name: 'Tyler Adams', pos: 'Midfielder', init: 'TA' },
+      { name: 'Weston McKennie', pos: 'Midfielder', init: 'WM' },
+      { name: 'Gio Reyna', pos: 'Midfielder', init: 'GR' },
+      { name: 'Matt Turner', pos: 'Goalkeeper', init: 'MT' },
+      { name: 'Yunus Musah', pos: 'Midfielder', init: 'YM' },
+    ]
+  }
+};
+
+let currentTeam = null;
+
+function setTeam(key) {
+  currentTeam = key;
+  const t = TEAMS[key];
+
+  // Body class for theme
+  document.body.className = key;
+
+  // Button states
+  document.querySelectorAll('.team-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.team === key);
+  });
+
+  // Hero
+  document.getElementById('hero-eyebrow').textContent = t.eyebrow;
+  document.getElementById('hero-team-name').textContent = t.heroName;
+  document.getElementById('hero-sub').textContent = t.heroSub;
+
+  // Stats
+  document.getElementById('stat-wc').textContent = t.stats.wc;
+  document.getElementById('stat-best').textContent = t.stats.best;
+  document.getElementById('stat-group').textContent = t.stats.group;
+  document.getElementById('stat-games').textContent = t.stats.games;
+
+  // Schedule badge
+  document.getElementById('schedule-badge').textContent = 'Group ' + t.group;
+
+  // Matches
+  const ml = document.getElementById('matches-list');
+  ml.innerHTML = '';
+  t.matches.forEach((m, i) => {
+    const card = document.createElement('div');
+    card.className = 'match-card' + (m.featured ? ' featured' : '');
+    card.style.transitionDelay = (i * 0.06) + 's';
+    card.innerHTML = `
+      <div class="match-team">
+        <span class="match-flag">${m.homeFlag}</span>
+        <div>
+          <div class="match-team-name">${m.home}</div>
+          <div class="match-team-sub">Home</div>
+        </div>
+      </div>
+      <div class="match-center">
+        <div class="match-date">${m.date}</div>
+        <div class="match-vs">VS</div>
+        <div class="match-time">${m.time}</div>
+        <div class="match-venue-tag">📍 ${m.venue}</div>
+      </div>
+      <div class="match-team away">
+        <span class="match-flag">${m.awayFlag}</span>
+        <div>
+          <div class="match-team-name">${m.away}</div>
+          <div class="match-team-sub">Away</div>
+        </div>
+      </div>
+    `;
+    ml.appendChild(card);
+    setTimeout(() => card.classList.add('visible'), 50 + i * 60);
+  });
+
+  // Group table
+  document.getElementById('group-title').textContent = 'Group ' + t.group;
+  document.getElementById('group-badge').textContent = t.name;
+  const tbody = document.getElementById('group-body');
+  tbody.innerHTML = '';
+  t.groupData.forEach(row => {
+    const isSelected = row.team === t.name || (key === 'bih' && row.team === 'Bosnia & Herzegovina') || (key === 'usa' && row.team === 'United States');
+    const tr = document.createElement('tr');
+    if (isSelected) tr.className = 'highlight-row';
+    tr.innerHTML = `
+      <td>
+        <div class="team-cell">
+          <span class="team-flag-sm">${row.flag}</span>
+          <span class="team-name-cell">${row.qual ? '<span class="qualification-bar"></span>' : ''}${row.team}</span>
+        </div>
+      </td>
+      <td>${row.pld}</td>
+      <td>${row.w}</td>
+      <td>${row.d}</td>
+      <td>${row.l}</td>
+      <td>${row.gd > 0 ? '+' : ''}${row.gd}</td>
+      <td class="pts-cell">${row.pts}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Info cards
+  document.getElementById('info-grid').style.display = 'grid';
+  document.getElementById('info-flag').textContent = t.flag;
+  document.getElementById('info-coach').textContent = t.coach;
+  document.getElementById('info-coach-sub').textContent = t.coachSub;
+  document.getElementById('info-best').textContent = t.best;
+  document.getElementById('info-best-sub').textContent = t.bestSub;
+  document.getElementById('info-first').textContent = t.firstMatch;
+  document.getElementById('info-first-sub').textContent = t.firstSub;
+  document.getElementById('info-venue').textContent = t.venue;
+  document.getElementById('info-venue-sub').textContent = t.venueSub;
+
+  // Players
+  document.getElementById('squad-badge').textContent = t.name;
+  const pg = document.getElementById('players-grid');
+  pg.innerHTML = '';
+  t.players.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'player-card';
+    card.innerHTML = `
+      <div class="player-avatar">${p.init}</div>
+      <div class="player-name">${p.name}</div>
+      <div class="player-pos">${p.pos}</div>
+    `;
+    pg.appendChild(card);
+  });
+
+  // Show sections
+  document.querySelectorAll('.section').forEach((s, i) => {
+    setTimeout(() => s.classList.add('visible'), 100 + i * 80);
+  });
+}
+
+// Intersection observer for match cards visibility
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+
+// Observe existing and future match cards
+function observeMatchCards() {
+  document.querySelectorAll('.match-card').forEach(c => observer.observe(c));
+}
+
+// Default to BiH on load
+window.addEventListener('load', () => {
+  setTeam('bih');
+  setTimeout(observeMatchCards, 300);
+});
+
+// Re-observe after team change
+const origSetTeam = setTeam;
+</script>
+</body>
+</html>
